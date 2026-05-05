@@ -1,0 +1,66 @@
+## Build
+bin/
+obj/
+out/
+
+## Rider
+.idea/
+*.sln.iml
+
+## VS Code
+.vscode/
+
+## Visual Studio
+.vs/
+
+## User files
+*.user
+*.userosscache
+*.suo
+
+## Logs
+*.log
+
+## OS files
+.DS_Store
+Thumbs.db
+
+## Test results
+TestResults/
+
+## NuGet
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+
+## Coverage
+coverage/
+*.coverage
+*.coveragexml
+
+## Publish
+publish/
+
+## Secrets
+appsettings.*.json
+!appsettings.json
+
+## Entity Framework
+Migrations/
+
+## Docker (se usar depois)
+docker-compose.override.yml
+
+## Temporary files
+*.tmp
+*.temp
+
+## JetBrains
+*.DotSettings.user
+
+## Node (caso use front junto)
+node_modules/
+
+## Cache
+.cache/

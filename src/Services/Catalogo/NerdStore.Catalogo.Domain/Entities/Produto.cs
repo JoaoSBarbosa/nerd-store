@@ -2,6 +2,7 @@
 using NerdStore.Core.DomainObjects.Interfaces;
 using NerdStore.Core.DomainObjects.Model;
 using NerdStore.Core.Exceptions;
+using NerdStore.Core.Validations;
 
 namespace NerdStore.Catalogo.Domain.Entities;
 
@@ -42,8 +43,12 @@ public class Produto : Entity, IAggregateRoot
 
     private void ValidarProduto(string nome, string descricao)
     {
-        if (string.IsNullOrWhiteSpace(nome)) throw new DomainException("O campo nome é obrigatorio");
-        if (string.IsNullOrWhiteSpace(descricao)) throw new DomainException("O campo descrição não pode ser nula.");
+        Validacoes.ValidarSeVazio(nome, "O campo nome é obrigatorio");
+        Validacoes.ValidarSeVazio(descricao, "O campo descrição é obrigatorio");
+
+        Validacoes.ValidarCaracteres(nome, 100, 5, "O campo nome deve conter no máximo 100 caracteres e no mínimo 5 caracteres");
+        Validacoes.ValidarCaracteres(descricao, 1000, 5, "O campo descrição deve conter no máximo 1000 caracteres e no mínimo 5 caracteres");
+
     }
 
     public void Ativar() => Ativo = true;

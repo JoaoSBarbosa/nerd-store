@@ -1,4 +1,5 @@
 
+using NerdStore.Catalogo.Domain.ValuesObject;
 using NerdStore.Core.DomainObjects.Interfaces;
 using NerdStore.Core.DomainObjects.Model;
 using NerdStore.Core.Validations;
@@ -18,7 +19,7 @@ public class Produto : Entity, IAggregateRoot
     public Guid CategoriaId { get; set; }
 
     public Categoria Categoria { get; private set; }
-
+    public Dimensoes Dimensoes { get; private set; }
     public Produto(
         string nome,
         string descricao,
@@ -26,7 +27,8 @@ public class Produto : Entity, IAggregateRoot
         decimal valor,
         DateTimeOffset dataCadastro,
         string imagem,
-        Guid categoriaId
+        Guid categoriaId,
+        Dimensoes dimensoes
     )
     {
         Nome = nome;
@@ -36,6 +38,32 @@ public class Produto : Entity, IAggregateRoot
         DataCadastro = dataCadastro;
         Imagem = imagem;
         CategoriaId = categoriaId;
+        Dimensoes = dimensoes;
+        Validar();
+
+
+    }
+    public Produto(
+      string nome,
+      string descricao,
+      bool ativo,
+      decimal valor,
+      DateTimeOffset dataCadastro,
+      string imagem,
+      Guid categoriaId,
+      int altura,
+      int largura,
+      int profundidade
+  )
+    {
+        Nome = nome;
+        Descricao = descricao;
+        Ativo = ativo;
+        Valor = valor;
+        DataCadastro = dataCadastro;
+        Imagem = imagem;
+        CategoriaId = categoriaId;
+        Dimensoes = new Dimensoes(altura, largura, profundidade);
         Validar();
 
 

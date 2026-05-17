@@ -71,6 +71,10 @@ namespace NerdStore.Core.Validations
         {
             if (valor <= minimo) throw new DomainException(mensage);
         }
+        public static void ValidarSeMenorIgualMinimo(decimal valor, decimal minimo, string mensage)
+        {
+            if (valor <= minimo) throw new DomainException(mensage);
+        }
         public static void ValidarSeMenorIgualMinimo(float valor, float minimo, string mensage)
         {
             if (valor <= minimo) throw new DomainException(mensage);

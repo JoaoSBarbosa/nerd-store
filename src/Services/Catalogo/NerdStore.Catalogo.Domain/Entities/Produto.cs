@@ -1,7 +1,6 @@
 
 using NerdStore.Core.DomainObjects.Interfaces;
 using NerdStore.Core.DomainObjects.Model;
-using NerdStore.Core.Exceptions;
 using NerdStore.Core.Validations;
 
 namespace NerdStore.Catalogo.Domain.Entities;
@@ -30,7 +29,6 @@ public class Produto : Entity, IAggregateRoot
         Guid categoriaId
     )
     {
-        ValidarProduto(nome, descricao);
         Nome = nome;
         Descricao = descricao;
         Ativo = ativo;
@@ -38,16 +36,22 @@ public class Produto : Entity, IAggregateRoot
         DataCadastro = dataCadastro;
         Imagem = imagem;
         CategoriaId = categoriaId;
+        Validar();
+
 
     }
 
-    private void ValidarProduto(string nome, string descricao)
+    private void Validar()
     {
-        Validacoes.ValidarSeVazio(nome, "O campo nome é obrigatorio");
-        Validacoes.ValidarSeVazio(descricao, "O campo descrição é obrigatorio");
+        Validacoes.ValidarSeVazio(Nome, "O campo nome é obrigatorio");
+        Validacoes.ValidarSeVazio(Descricao, "O campo descrição é obrigatorio");
+        Validacoes.ValidarSeVazio(Imagem, "O campo imagem do produto não pode estar vazio");
 
-        Validacoes.ValidarCaracteres(nome, 100, 5, "O campo nome deve conter no máximo 100 caracteres e no mínimo 5 caracteres");
-        Validacoes.ValidarCaracteres(descricao, 1000, 5, "O campo descrição deve conter no máximo 1000 caracteres e no mínimo 5 caracteres");
+        Validacoes.ValidarCaracteres(Nome, 100, 5, "O campo nome deve conter no máximo 100 caracteres e no mínimo 5 caracteres");
+        Validacoes.ValidarCaracteres(Descricao, 1000, 5, "O campo descrição deve conter no máximo 1000 caracteres e no mínimo 5 caracteres");
+
+        Validacoes.ValidarSeDiferente(CategoriaId, Guid.Empty, "O campo ID da categoria não pode estar vazio");
+        Validacoes.ValidarSeMenorIgualMinimo(Valor, 0, "O campo valor deve ser maior que zero");
 
     }
 

@@ -60,14 +60,14 @@ public class Produto : Entity, IAggregateRoot
 
     public void AdicionarEstoque(int quantidade)
     {
-        if (quantidade < 0) throw new Exception("A quantidade a ser adicionada deve ser maior que zero.");
+        if (quantidade < 0) quantidade *= -1;
 
         QuantidadeEstoque += quantidade;
     }
 
-    public void RemoverEstoque(int quantidade)
+    public void DebitarEstoque(int quantidade)
     {
-        if (QuantidadeEstoque < quantidade) throw new Exception("Não há estoque suficiente para remover a quantidade solicitada.");
+        if (!PossuiEstoque(quantidade)) throw new Exception($"O estoque atual é de {QuantidadeEstoque} unidades. Não há estoque suficiente para remover a quantidade solicitada. [{quantidade}].");
         if (quantidade < 0) quantidade *= -1;
 
         QuantidadeEstoque -= quantidade;
@@ -82,9 +82,6 @@ public class Produto : Entity, IAggregateRoot
         CategoriaId = categoria.Id;
     }
 
-    public void AlterarDescricao(string descricao)
-    {
-        if (string.IsNullOrWhiteSpace(descricao)) throw new Exception("A descrição do produto não pode ser nula ou vazia.");
-        Descricao = descricao;
-    }
+    public void AlterarDescricao(string descricao) => Descricao = descricao;
+
 }

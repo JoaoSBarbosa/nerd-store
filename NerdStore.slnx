@@ -1,4 +1,5 @@
 <Solution>
   <Project Path="src/Services/Catalogo/NerdStore.Catalogo.Domain/NerdStore.Catalogo.Domain.csproj" />
   <Project Path="src/Services/Core/NerdStore.Core/NerdStore.Core.csproj" />
+  <Project Path="src\Services\Catalogo\NerdStore.Catalogo.Domain.Tests\NerdStore.Catalogo.Domain.Tests.csproj" />
 </Solution>
